@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/einsteinish/go_tutorial/string_util"
 	"math"
 )
 
 func main() {
-	c := true
-	fmt.Println(c, math.Floor(1.7), math.Ceil(9.2))
+	fmt.Println(math.Sqrt(5))
+	fmt.Println(string_util.Reverse("reverse me"))
 }
