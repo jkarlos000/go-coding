@@ -3,15 +3,16 @@ package main
 import "fmt"
 
 func main() {
-	for i := 1; i <= 100; i++ {
-		if i%3 == 0 && i%5 == 0 {
-			fmt.Println("FizzBuzz")
-		} else if i%3 == 0 {
-			fmt.Println("Fizz")
-		} else if i%5 == 0 {
-			fmt.Println("Buzz")
-		} else {
-			fmt.Println(i)
-		}
-	}
+	// Diccionarios (asi se conoce en Python) de Go lang (MAP)
+	moons := make(map[string]string)
+
+	// Asignamos los valores
+	moons["Earth"] = "Moon"
+	moons["Jupiter"] = "Europa"
+	moons["Saturn"] = "Titan"
+
+	fmt.Println(moons)
+
+	delete(moons, "Saturn")
+	fmt.Println(moons)
 }
