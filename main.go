@@ -1,37 +1,31 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
-// recursividad
-func fibor(n int) int {
-	if n <= 1 {
-		return n
-	}
-	return fibor(n-1) + fibor(n-2)
-}
-
-// iterativo
-func fiboi() func() int {
-	x, y := 0, 1
-	return func() int {
-		r := x
-		x, y = y, x+y
-		return r
-	}
+type Person struct {
+	firstName string
+	lastName string
+	city string
+	gender string
+	age int
 }
 
 func main() {
-
-	// Funciones anónimas tipo Closure
-	n := 10
-	for i := 0; i <= n; i++ {
-		fmt.Printf("%d ", fibor(i))
+//inicializando la persona como un 'struct'
+	p1 := Person{
+		firstName: "Steven",
+		lastName:  "King",
+		city:      "Chicago",
+		gender:    "m",
+		age:       23,
 	}
-	fmt.Println()
-	next_fibo := fiboi()
-	for i := 0; i <= n; i++ {
-		fmt.Printf("%d ", next_fibo())
-	}
-	fmt.Println()
-
+	p2 := Person{"Neena", "Kochhar", "Boston", "f", 13	}
+	fmt.Println(p1)
+	fmt.Println(p2)
+	fmt.Println(p2.firstName, p2.lastName)
+	p2.age++
+	fmt.Println(p2)
 }
