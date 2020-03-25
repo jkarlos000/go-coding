@@ -1,18 +1,13 @@
 package main
 
-import (
-	"fmt"
-)
-
-func greetings(name string) string {
-	return "Hello " + name
-}
-
-func add(x int, y int) int {
-	return x + y
-}
+import "fmt"
 
 func main() {
-	fmt.Println(greetings("Einstein"))
-	fmt.Println(add(54, 56))
+	/*var frutas [2]string
+	frutas[0] = "manzana"
+	frutas[1] = "platano"*/
+	frutas := [2]string{"manzana", "platano"}
+	ids := []int{1,3,5,7,9}
+	fmt.Println(frutas)
+	fmt.Println(ids)
 }
