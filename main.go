@@ -2,26 +2,36 @@ package main
 
 import "fmt"
 
-// retornamos una función y que esta retorna un entero
-func init_seq() func() int {
-	i := 0
+// recursividad
+func fibor(n int) int {
+	if n <= 1 {
+		return n
+	}
+	return fibor(n-1) + fibor(n-2)
+}
+
+// iterativo
+func fiboi() func() int {
+	x, y := 0, 1
 	return func() int {
-		i++
-		return i
+		r := x
+		x, y = y, x+y
+		return r
 	}
 }
 
 func main() {
 
 	// Funciones anónimas tipo Closure
-	next_int := init_seq()
-	fmt.Println(next_int())
-	fmt.Println(next_int())
-	fmt.Println(next_int())
-
-	next_int2 := init_seq()
-	fmt.Println(next_int2())
-	fmt.Println(next_int2())
-	fmt.Println(next_int2())
+	n := 10
+	for i := 0; i <= n; i++ {
+		fmt.Printf("%d ", fibor(i))
+	}
+	fmt.Println()
+	next_fibo := fiboi()
+	for i := 0; i <= n; i++ {
+		fmt.Printf("%d ", next_fibo())
+	}
+	fmt.Println()
 
 }
