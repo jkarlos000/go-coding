@@ -2,31 +2,24 @@ package main
 
 import "fmt"
 
-func isBalanced(p string) bool {
-	pairs := map[rune]rune{'(':')', '{': '}', '[': ']'} //Rune - alias Int32
-	stack := []rune{}
-
-	for _, c := range p {
-		if c == '(' || c == '{' || c == '[' {
-			stack = append(stack, c)
-		} else {
-			if len(stack) < 1 {
-				return false
-			}
-			if c == pairs[stack[len(stack) - 1]] {
-				stack = stack[:len(stack) - 1]
-			} else {
-				return false
-			}
-		}
-	}
-	return true
-}
-
 func main() {
-	// Diccionarios (asi se conoce en Python) de Go lang (MAP)
-	parentheses := []string{")(", "[(])", "(()){}[]", "())[]{}", "()[]{}(([])){[()][]}"}
-	for _, p := range parentheses{
-		fmt.Printf("%s: %t\n", p, isBalanced(p))
+	/*for _, i := range []int{1,2,3,4,5}{
+		fmt.Println(i)
+	}*/
+	ids := []int{0,10,20,30,40,50,60}
+	for i, id := range ids {
+		fmt.Printf("%d - ID: %d\n", i, id)
 	}
+
+	// Si usted no tiene pensado usar el indexx
+	for _, id := range ids {
+		fmt.Printf("ID: %d\n", id)
+	}
+
+	// sumatoria de los ID
+	sum := 0
+	for _, id := range ids {
+		sum += id
+	}
+	fmt.Println("Sum", sum)
 }
