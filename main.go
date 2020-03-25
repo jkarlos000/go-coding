@@ -2,22 +2,20 @@ package main
 
 import "fmt"
 
-// La estructura Animal tiene un Nombre, una Edad, para representar un animal.
-type Animal struct {
-	Name string
-	Age uint
-}
+type IPAddr [4]byte
 
-// Función String() permite que el 'Animal' satisface una interfaz Stringer o conocida como @toString()
-func (a Animal) String() string {
-	return fmt.Sprintf("%v (%d)", a.Name, a.Age)
+// TODO: agregar un método "String() string" para IPAddr
+func (a IPAddr) String() string {
+	return fmt.Sprintf("%d.%d.%d.%d", a[0], a[1], a[2], a[3])
 }
 
 func main() {
-	a := Animal{
-		Name: "Gopher",
-		Age:  2,
-	}
-	myStr := a.String()
-	fmt.Println(myStr)
+hosts := map[string]IPAddr{
+	"loopback": {127,0,0,1},
+	"googleDNS": {8,8,8,8},
+	"serverProxy": {192,168,1,254},
+}
+for name, ip := range hosts {
+	fmt.Printf("%v: %v\n", name, ip)
+}
 }
