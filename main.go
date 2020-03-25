@@ -1,48 +1,23 @@
 package main
 
-import (
-	"fmt"
-	"strconv"
-)
+import "fmt"
 
-type Person struct {
-	firstName string
-	lastName string
-	city string
-	gender string
-	age int
+// La estructura Animal tiene un Nombre, una Edad, para representar un animal.
+type Animal struct {
+	Name string
+	Age uint
 }
 
-// Método (recibe un valor)
-func (p Person) hello() string {
-	return "Hello, I'm " + p.firstName + " " + p.lastName + ", " + strconv.Itoa(p.age) + " years old"
-}
-
-// Método (recibe un puntero) - Con esto se modifica los datos de la estructura
-func (p *Person) hasBirthday() {
-	p.age++
+// Función String() permite que el 'Animal' satisface una interfaz Stringer o conocida como @toString()
+func (a Animal) String() string {
+	return fmt.Sprintf("%v (%d)", a.Name, a.Age)
 }
 
 func main() {
-//inicializando la persona como un 'struct'
-	p1 := Person{
-		firstName: "Steven",
-		lastName:  "King",
-		city:      "Chicago",
-		gender:    "m",
-		age:       23,
+	a := Animal{
+		Name: "Gopher",
+		Age:  2,
 	}
-	p2 := Person{"Neena", "Kochhar", "Boston", "f", 13	}
-	fmt.Println(p1)
-	fmt.Println(p2)
-	fmt.Println(p2.firstName, p2.lastName)
-/*	p2.age++
-	fmt.Println(p2)*/
-	fmt.Println(p1.hello())
-	fmt.Println(p2.hello())
-
-	p2.hasBirthday() // Edad + 1
-	fmt.Println(p2.hello())
-	p2.hasBirthday() // Edad + 1
-	fmt.Println(p2.hello())
+	myStr := a.String()
+	fmt.Println(myStr)
 }
