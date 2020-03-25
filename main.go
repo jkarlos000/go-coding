@@ -2,10 +2,30 @@ package main
 
 import "fmt"
 
+func isPrime(n int) bool {
+	if n == 2 {
+		return true
+	}
+	for i := 2; i < n; i++ {
+		if n % i == 0 {
+			return false
+		}
+	}
+	return true
+}
+
+func getPrimes(n int, a []int) []int {
+	for i := 2; i < n; i++ {
+		if isPrime(i) {
+			a = append(a, i)
+		}
+	}
+	return a
+}
+
 func main() {
-	var palabras []int
-	//palabras = make([]int,0,10)
-	//palabras = append(palabras, 15,39,45,100)
-	palabras = append(palabras, 10000, 495, 193)
-	fmt.Printf("Palabras: longitud %d, capacidad %d, data: %v\n", len(palabras), cap(palabras), palabras)
+	n := 100
+	//ans := []int{}
+	var ans []int
+	fmt.Printf("%v\n", getPrimes(n, ans[0:]))
 }
