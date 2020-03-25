@@ -3,60 +3,20 @@ package main
 import "fmt"
 
 func main() {
-	// range usando string, nos devuelve el index y rune
-	/*for i, c := range "CHICHITOMANCO" {
-		fmt.Printf("%#U starts at byte position %d\n", c, i)
-	}*/
-	// range usando MAPS
-	/*moons := map[string]string{"Earth":"Moon", "Jupiter":"Europa","Saturn":"Titan"}
-	for k, v := range moons {
-		fmt.Printf("%s: %s\n", k, v)
-	}*/
-	/*numbers := map[string]int{
-		"Uno": 1,
-		"Dos": 2,
-		"Tres": 3,
-		"Cuatro": 4,
-		"Cinco": 5,
-	}
-	for k,v := range numbers {
-		fmt.Println(k, v)
-	}*/
-	// Iteraremos sobre 5 valores en el canal 'queue'
-	/*queue := make(chan string, 5)
-	queue <- "Enceladus"
-	queue <- "Titan"
-	queue <- "Europa"
-	queue <- "Ganemede"
-	queue <- "Io"
-	close(queue)
-	// Este 'rango' itera sobre los elementos que son recibidos desde 'queue'. Debido a que hemos 'closed' the canal tambien, la interacion termino despues de recibir 5 colas
-	for q := range queue {
-		fmt.Println(q)
-	}*/
-	// Creamos un Slice vacio apuntado a nuestra estructura
-	cities := []*Cities{}
+	/*a := 10
+	b := &a
 
-	// Creamos una estructura y la agregamos al slice
-	ct := new (Cities)
-	ct.name = "London"
-	ct.location[0] = 5
-	ct.location[1] = 0
-	cities = append(cities, ct)
+	fmt.Println(a, b)
+	fmt.Printf("%T %T", a, b)*/
 
-	//Creamos otra estructura
-	ct = new(Cities)
-	ct.name = "Sydney"
-	ct.location = [2]int{34, 51}
-	cities = append(cities, ct)
+	i, j := 42, 2701
 
-	for i := range(cities){
-		c := cities[i]
-		fmt.Println("City:",*c)
-	}
-}
+	p := &i // Definimos a 'p' como puntero a 'i'
+	fmt.Println(*p) //Leemos 'i' como un puntero obteniendo el valor
+	*p = 21 // Establecemos el valor de 'i', con nuestro puntero, recuerda que estamos manipulando memoria con el puntero, para obtener el valor usamos *
+	fmt.Println(i) // Obtenemos el nuevo valor de 'i'
 
-type Cities struct {
-	name string
-	location [2]int
+	p = &j // Apuntamos a 'j'
+	*p = *p / 37 // Dividimos el valor de 'j' mediante el puntero
+	fmt.Println(j) //Miramos el nuevo valor de 'j'
 }
