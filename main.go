@@ -2,35 +2,26 @@ package main
 
 import "fmt"
 
-func say_hello(msg string) {
-	fmt.Println(msg)
-}
-
-/*
-Esta es una función regular
-nombre: regular_f_returning_anonymous_f
-return type: func(string) - Esta función anónima requiere como parámetro un string
-*/
-func regular_f_returning_anonymous_f() func(string) {
-	// devuelve una función anónima que es una función interna
-	return func(msg string) {
-		fmt.Println(msg)
+// retornamos una función y que esta retorna un entero
+func init_seq() func() int {
+	i := 0
+	return func() int {
+		i++
+		return i
 	}
 }
 
 func main() {
-	//Funciones anónimas.... hay que practicar mucho esta parte
 
-	// función regular
-	//say_hello("Hello from regular function!")
+	// Funciones anónimas tipo Closure
+	next_int := init_seq()
+	fmt.Println(next_int())
+	fmt.Println(next_int())
+	fmt.Println(next_int())
 
-	// función anónima
-	func(msg string){
-		fmt.Println(msg)
-	}("Hello from an anonymous function")
-
-	print_fnc := regular_f_returning_anonymous_f()
-	print_fnc("Hello from returned anonymous function")
-	// Todavía no se que uso darle a esto, pero es necesario investigar y mucho, sobre todo para las promesas
+	next_int2 := init_seq()
+	fmt.Println(next_int2())
+	fmt.Println(next_int2())
+	fmt.Println(next_int2())
 
 }
