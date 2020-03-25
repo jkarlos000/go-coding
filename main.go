@@ -1,31 +1,39 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
 
-func isPrime(n int) bool {
-	if n == 2 {
-		return true
-	}
-	for i := 2; i < n; i++ {
-		if n % i == 0 {
-			return false
+var suites = [4]string{"D", "S", "C", "H"}
+var ranks = [13]string{"A","2","3","4","5","6","7","8","9","10","J","Q","K"}
+
+func createDesck() []string {
+	deck := []string{}
+	for _, s := range suites{
+		for _, r := range ranks {
+			deck = append(deck, s+r)
 		}
 	}
-	return true
+	return deck
 }
 
-func getPrimes(n int, a []int) []int {
-	for i := 2; i < n; i++ {
-		if isPrime(i) {
-			a = append(a, i)
-		}
-	}
+func shuffleDeck(a []string) []string {
+	x := time.Now().UnixNano()
+	rand.Seed(x)
+	fmt.Printf("x-seed:\n%+v\n",x)
+	rand.Shuffle(len(a), func(i, j int) {
+		a[i], a[j] = a[j], a[i]
+	})
 	return a
 }
 
 func main() {
-	n := 100
-	//ans := []int{}
-	var ans []int
-	fmt.Printf("%v\n", getPrimes(n, ans[0:]))
+	deck := createDesck()
+	fmt.Printf("Initial Deck: \n%+v\n", deck)
+	deck = shuffleDeck(deck)
+	fmt.Printf("Shuffled desck:\n%+v\n", deck)
+	hands := deck[:5]
+	fmt.Printf("Hands:\n%+v\n",hands)
 }
