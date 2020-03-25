@@ -3,10 +3,9 @@ package main
 import "fmt"
 
 func main() {
-	alphabet := []string{"a","b","c","d","e"}
-	fmt.Println(alphabet)
-
-	// make (type, len, cap)
-	s := make([]int, 5, 10)
-	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s),s)
+	var palabras []int
+	//palabras = make([]int,0,10)
+	//palabras = append(palabras, 15,39,45,100)
+	palabras = append(palabras, 10000, 495, 193)
+	fmt.Printf("Palabras: longitud %d, capacidad %d, data: %v\n", len(palabras), cap(palabras), palabras)
 }
