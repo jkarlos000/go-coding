@@ -2,21 +2,35 @@ package main
 
 import "fmt"
 
+func say_hello(msg string) {
+	fmt.Println(msg)
+}
+
+/*
+Esta es una función regular
+nombre: regular_f_returning_anonymous_f
+return type: func(string) - Esta función anónima requiere como parámetro un string
+*/
+func regular_f_returning_anonymous_f() func(string) {
+	// devuelve una función anónima que es una función interna
+	return func(msg string) {
+		fmt.Println(msg)
+	}
+}
+
 func main() {
-	/*a := 10
-	b := &a
+	//Funciones anónimas.... hay que practicar mucho esta parte
 
-	fmt.Println(a, b)
-	fmt.Printf("%T %T", a, b)*/
+	// función regular
+	//say_hello("Hello from regular function!")
 
-	i, j := 42, 2701
+	// función anónima
+	func(msg string){
+		fmt.Println(msg)
+	}("Hello from an anonymous function")
 
-	p := &i // Definimos a 'p' como puntero a 'i'
-	fmt.Println(*p) //Leemos 'i' como un puntero obteniendo el valor
-	*p = 21 // Establecemos el valor de 'i', con nuestro puntero, recuerda que estamos manipulando memoria con el puntero, para obtener el valor usamos *
-	fmt.Println(i) // Obtenemos el nuevo valor de 'i'
+	print_fnc := regular_f_returning_anonymous_f()
+	print_fnc("Hello from returned anonymous function")
+	// Todavía no se que uso darle a esto, pero es necesario investigar y mucho, sobre todo para las promesas
 
-	p = &j // Apuntamos a 'j'
-	*p = *p / 37 // Dividimos el valor de 'j' mediante el puntero
-	fmt.Println(j) //Miramos el nuevo valor de 'j'
 }
