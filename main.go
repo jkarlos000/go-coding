@@ -2,20 +2,28 @@ package main
 
 import "fmt"
 
-type IPAddr [4]byte
-
-// TODO: agregar un método "String() string" para IPAddr
-func (a IPAddr) String() string {
-	return fmt.Sprintf("%d.%d.%d.%d", a[0], a[1], a[2], a[3])
+type Cities struct {
+	name string
+	location [2]int
 }
-
 func main() {
-hosts := map[string]IPAddr{
-	"loopback": {127,0,0,1},
-	"googleDNS": {8,8,8,8},
-	"serverProxy": {192,168,1,254},
-}
-for name, ip := range hosts {
-	fmt.Printf("%v: %v\n", name, ip)
-}
+	// Creamos un Slice vacío, apuntando a la estructura
+	cities := []*Cities{}
+
+	// Creamos una estructura y la agregamos a nuestro Slice
+	ct := new (Cities)
+	ct.name = "London"
+	ct.location = [2]int{5,0}
+	cities = append(cities, ct)
+
+	// Creamos otra estructura de tipo Cities
+	ct = new(Cities)
+	ct.name = "Sydney"
+	ct.location = [2]int{34, 51}
+	cities = append(cities, ct)
+
+	for i:= range (cities) {
+		c := cities[i]
+		fmt.Println("City:", *c)
+	}
 }
