@@ -3,23 +3,60 @@ package main
 import "fmt"
 
 func main() {
-	/*for _, i := range []int{1,2,3,4,5}{
-		fmt.Println(i)
+	// range usando string, nos devuelve el index y rune
+	/*for i, c := range "CHICHITOMANCO" {
+		fmt.Printf("%#U starts at byte position %d\n", c, i)
 	}*/
-	ids := []int{0,10,20,30,40,50,60}
-	for i, id := range ids {
-		fmt.Printf("%d - ID: %d\n", i, id)
+	// range usando MAPS
+	/*moons := map[string]string{"Earth":"Moon", "Jupiter":"Europa","Saturn":"Titan"}
+	for k, v := range moons {
+		fmt.Printf("%s: %s\n", k, v)
+	}*/
+	/*numbers := map[string]int{
+		"Uno": 1,
+		"Dos": 2,
+		"Tres": 3,
+		"Cuatro": 4,
+		"Cinco": 5,
 	}
+	for k,v := range numbers {
+		fmt.Println(k, v)
+	}*/
+	// Iteraremos sobre 5 valores en el canal 'queue'
+	/*queue := make(chan string, 5)
+	queue <- "Enceladus"
+	queue <- "Titan"
+	queue <- "Europa"
+	queue <- "Ganemede"
+	queue <- "Io"
+	close(queue)
+	// Este 'rango' itera sobre los elementos que son recibidos desde 'queue'. Debido a que hemos 'closed' the canal tambien, la interacion termino despues de recibir 5 colas
+	for q := range queue {
+		fmt.Println(q)
+	}*/
+	// Creamos un Slice vacio apuntado a nuestra estructura
+	cities := []*Cities{}
 
-	// Si usted no tiene pensado usar el indexx
-	for _, id := range ids {
-		fmt.Printf("ID: %d\n", id)
-	}
+	// Creamos una estructura y la agregamos al slice
+	ct := new (Cities)
+	ct.name = "London"
+	ct.location[0] = 5
+	ct.location[1] = 0
+	cities = append(cities, ct)
 
-	// sumatoria de los ID
-	sum := 0
-	for _, id := range ids {
-		sum += id
+	//Creamos otra estructura
+	ct = new(Cities)
+	ct.name = "Sydney"
+	ct.location = [2]int{34, 51}
+	cities = append(cities, ct)
+
+	for i := range(cities){
+		c := cities[i]
+		fmt.Println("City:",*c)
 	}
-	fmt.Println("Sum", sum)
+}
+
+type Cities struct {
+	name string
+	location [2]int
 }
