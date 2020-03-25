@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc6801eb-55ba-4662-9ab1-572b0412b999" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -213,6 +212,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="767" y="429" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1280.984@0.0.1920.1040" timestamp="1585073135594" />
+    <state x="1057" y="97" width="583" height="846" key="find.popup" timestamp="1585166902528">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1057" y="97" width="583" height="846" key="find.popup/0.0.1920.1040/1920.0.1280.984@0.0.1920.1040" timestamp="1585166902528" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1585111656280">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

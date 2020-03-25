@@ -13,6 +13,10 @@ type Person struct {
 	age int
 }
 
+func (p Person) hello() string {
+	return "Hello, I'm " + p.firstName + " " + p.lastName + ", " + strconv.Itoa(p.age) + " years old"
+}
+
 func main() {
 //inicializando la persona como un 'struct'
 	p1 := Person{
@@ -26,6 +30,8 @@ func main() {
 	fmt.Println(p1)
 	fmt.Println(p2)
 	fmt.Println(p2.firstName, p2.lastName)
-	p2.age++
-	fmt.Println(p2)
+/*	p2.age++
+	fmt.Println(p2)*/
+fmt.Println(p1.hello())
+fmt.Println(p2.hello())
 }
