@@ -5,23 +5,41 @@ import (
 	"math"
 )
 
-type Point struct {
-	x, y float64
+type Shape interface {
+	area() float64
 }
 
-func (p *Point) scale(s float64) {
-	p.x = p.x * s
-	p.y = p.y * s
+type Circle struct {
+	x,y,radius float64
 }
 
-func (p *Point) size() float64 {
-	return math.Sqrt(p.x * p.x + p.y * p.y)
+type Rectangle struct {
+	width, height float64
+}
+
+func (c Circle) area() float64 {
+	return math.Pi * c.radius * c.radius
+}
+
+func (r Rectangle) area() float64 {
+	return r.width * r.height
+}
+
+func getArea(s Shape) float64 {
+	return s.area()
 }
 
 func main() {
-	p := &Point{3,4}
-	fmt.Printf("before scaling: = %+v, size: %v\n", p, p.size())
-	var sc float64 = 5
-	p.scale(sc)
-	fmt.Printf("after scaling: %+v, size: %v\n", p, p.size())
+	c := Circle{
+		x:      0,
+		y:      0,
+		radius: 5,
+	}
+	r:=Rectangle{
+		width:  10,
+		height: 5,
+	}
+
+	fmt.Printf("Circle area: %f\n", getArea(c))
+	fmt.Printf("Rectangle area: %f\n", getArea(r))
 }
