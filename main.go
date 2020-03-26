@@ -2,20 +2,37 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	"io/ioutil"
 )
 
-func index(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "<h1>Hello World</h1>")
+type Page struct {
+	Title string
+	Body []byte
 }
 
-func check(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "<h1>Health check</h1>")
+func (p *Page) save() error {
+	filename := p.Title + ".txt"
+	return ioutil.WriteFile(filename, p.Body, 0600)
+}
+
+func loadPage(title string) (*Page, error) {
+	filename := title+".txt"
+	body, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+	return &Page{
+		Title: title,
+		Body:  body,
+	}, nil
 }
 
 func main() {
-	http.HandleFunc("/", index)
-	http.HandleFunc("/health_check", check)
-	fmt.Println("Server starting....")
-	http.ListenAndServe(":3000", nil)
+	p1 := &Page{
+		Title: "TestPage",
+		Body:  []byte("This is a sample body Page."),
+	}
+	p1.save()
+	p2, _ := loadPage("TestPage")
+	fmt.Println(string(p2.Body))
 }
