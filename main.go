@@ -1,29 +1,24 @@
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
-type Prueba struct {
-	msg string
-	id int
+type Message struct {
+	Name string
+	Body string
+	Time int64
 }
 
 func main() {
-	var value interface{}
-	show(value)
-
-	value = 49
-	show(value)
-
-	value = "empty interface"
-	show(value)
-	//value = new(Prueba)
-	value = Prueba{
-		msg: "Hello from World",
-		id:  577,
+	m := Message{
+		Name: "Interface",
+		Body: "Empty Interface",
+		Time: 15567476233,
 	}
-	show(value)
-}
-
-func show(value interface{}) {
-	fmt.Printf("(%v, %T)\n", value, value)
+	b, err := json.Marshal(m)
+	fmt.Printf("err = %v\n", err)
+	fmt.Printf("b = %T%+v\n", b, b)
+	fmt.Printf("b = %T%s", b, b)
 }
