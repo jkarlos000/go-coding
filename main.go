@@ -1,45 +1,29 @@
 package main
 
-import (
-	"fmt"
-	"math"
-)
+import "fmt"
 
-type Shape interface {
-	area() float64
-}
-
-type Circle struct {
-	x,y,radius float64
-}
-
-type Rectangle struct {
-	width, height float64
-}
-
-func (c Circle) area() float64 {
-	return math.Pi * c.radius * c.radius
-}
-
-func (r Rectangle) area() float64 {
-	return r.width * r.height
-}
-
-func getArea(s Shape) float64 {
-	return s.area()
+type Prueba struct {
+	msg string
+	id int
 }
 
 func main() {
-	c := Circle{
-		x:      0,
-		y:      0,
-		radius: 5,
-	}
-	r:=Rectangle{
-		width:  10,
-		height: 5,
-	}
+	var value interface{}
+	show(value)
 
-	fmt.Printf("Circle area: %f\n", getArea(c))
-	fmt.Printf("Rectangle area: %f\n", getArea(r))
+	value = 49
+	show(value)
+
+	value = "empty interface"
+	show(value)
+	//value = new(Prueba)
+	value = Prueba{
+		msg: "Hello from World",
+		id:  577,
+	}
+	show(value)
+}
+
+func show(value interface{}) {
+	fmt.Printf("(%v, %T)\n", value, value)
 }
