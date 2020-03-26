@@ -1,24 +1,21 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
+	"net/http"
 )
 
-type Message struct {
-	Name string
-	Body string
-	Time int64
+func index(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "<h1>Hello World</h1>")
+}
+
+func check(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "<h1>Health check</h1>")
 }
 
 func main() {
-	m := Message{
-		Name: "Interface",
-		Body: "Empty Interface",
-		Time: 15567476233,
-	}
-	b, err := json.Marshal(m)
-	fmt.Printf("err = %v\n", err)
-	fmt.Printf("b = %T%+v\n", b, b)
-	fmt.Printf("b = %T%s", b, b)
+	http.HandleFunc("/", index)
+	http.HandleFunc("/health_check", check)
+	fmt.Println("Server starting....")
+	http.ListenAndServe(":3000", nil)
 }
