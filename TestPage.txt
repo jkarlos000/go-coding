@@ -1,5 +1,0 @@
-This is a sample body Page.
-Acabo de agregar redireccionamiento 302 para las páginas inexistentes.
-Además, el "guardar" debería funcionar ahora.
-
-Intente dar clic en el boton 'Save'
