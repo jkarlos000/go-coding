@@ -5,14 +5,19 @@ import (
 	"time"
 )
 
-func hello() {
-	fmt.Println("Hello from GoRoutine")
-	fmt.Println("Hello from 1")
-	fmt.Println("Hello from 2")
-	fmt.Println("Hello from 3")
+func sleep_250()  {
+	fmt.Println("sleep_250")
+	time.Sleep(250*time.Millisecond)
 }
+
+func sleep_500() {
+	fmt.Println("sleep_500")
+	time.Sleep(500*time.Millisecond)
+}
+
 func main() {
-	go hello()
+	go sleep_250()
+	go sleep_500()
+	time.Sleep(1000 * time.Millisecond)
 	fmt.Println("Main")
-	time.Sleep(1 * time.Millisecond)
 }
