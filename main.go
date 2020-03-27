@@ -1,17 +1,21 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-func hello(finished chan bool) {
-	fmt.Println("Hello Goroutine")
-	finished <- true
+func sum(s []int, c chan int) {
+	sum := 0
+	for _, v := range s{
+		sum += v
+	}
+	c <- sum // send sum to c
 }
 
 func main() {
-	finished := make(chan bool)
-	go hello(finished)
-	<-finished
-	fmt.Println("Main")
+	s := []int{1,2,3,4,5,6,7,8,9,10}
+	c := make(chan int)
+	go sum(s[:len(s)-1], c)
+	go sum(s[len(s)-1:], c)
+	/*x, y := <-c, <-c
+	fmt.Println(x,y,x+y)*/
+	fmt.Printf("%#v", c)
 }
