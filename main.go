@@ -1,10 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 func main() {
-	for i:=0; i<5; i++ {
-		defer fmt.Println(i)
+	f, err := os.Create("xd/defer.txt")
+	if err != nil {
+		panic("No se puede crear el fichero")
+	} else {
+		fmt.Printf("err = %+v", err)
 	}
-	fmt.Println("main")
+	defer f.Close()
+	fmt.Fprint(f,"Hahaha soy parte de un fichero")
 }
