@@ -1,16 +1,16 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
-func getName(names ...string) string {
-	return strings.Join(names, " ")
+func sum(nums ...int) int {
+	s := 0
+	for _, i := range nums {
+		s += i
+	}
+	return s
 }
 
 func main() {
-	fmt.Println(getName("Claude", "Debussy"))
-	fmt.Println(getName("Ravel"))
-	fmt.Println(getName(""))
+	numbers := []int{1,2,3,4,5}
+	fmt.Println(sum(numbers...))
 }
