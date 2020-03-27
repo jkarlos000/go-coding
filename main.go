@@ -1,16 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-func sum(nums ...int) int {
-	s := 0
-	for _, i := range nums {
-		s += i
-	}
-	return s
+func hello() {
+	fmt.Println("Hello from GoRoutine")
+	fmt.Println("Hello from 1")
+	fmt.Println("Hello from 2")
+	fmt.Println("Hello from 3")
 }
-
 func main() {
-	numbers := []int{1,2,3,4,5}
-	fmt.Println(sum(numbers...))
+	go hello()
+	fmt.Println("Main")
+	time.Sleep(1 * time.Millisecond)
 }
