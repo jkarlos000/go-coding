@@ -1,29 +1,65 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
-func f() {
-	/*defer func() {
-		if r:=recover(); r != nil {
-			fmt.Println("Recovered in f", r)
-		}
-	}()*/
-	fmt.Println("Calling g()")
-	g(0)
-	fmt.Println("Return normally from g()")
-}
-
-func g(i int) {
-	if i > 3 {
-		fmt.Println("Panicking!")
-		panic(fmt.Sprintf("%v", i+99))
-	}
-	defer fmt.Println("Defer in g()", i)
-	fmt.Println("Printing ing g()", i)
-	g(i+1)
+type point struct {
+	x,y,z int
 }
 
 func main() {
-	f()
-	fmt.Println("Returned normally from f()")
+	p := point{
+		x: 10,
+		y: 200,
+		z: 3000,
+	}
+	fmt.Println(p)
+	fmt.Printf("%v\n",p)
+	fmt.Printf("%+v\n",p)
+	fmt.Printf("%#v\n",p)
+	fmt.Printf("%T\n",p)
+	fmt.Println()
+
+	var b bool
+	b = true
+	fmt.Printf("%t\n",b)
+	fmt.Println()
+
+	fmt.Printf("%d\n", 12335)
+	fmt.Println()
+
+	fmt.Printf("%b\n", []byte("HOLA MUNDO"))
+	fmt.Printf("%b\n", 9)
+	fmt.Println()
+
+	fmt.Printf("%c\n", 97)
+	fmt.Println()
+
+	fmt.Printf("%x\n", 1501)
+	fmt.Println()
+
+	fmt.Printf("%f\n", 3.14159268)
+	fmt.Println()
+
+	fmt.Printf("%e\n", math.Pow(-9,3))
+	fmt.Printf("%E\n", math.Pow(-5,15))
+	fmt.Println()
+
+	fmt.Printf("%s\n","String Format")
+	fmt.Printf("%s\n", "comillas")
+	fmt.Printf("%s\n", "\"comillas\"")
+	fmt.Printf("%q\n", "\"comillas\"")
+	fmt.Println()
+
+	fmt.Printf("%x\n", "Hexadecimeame esto")
+	fmt.Printf("%x\n", "h")
+	fmt.Printf("%x\n", "e")
+	fmt.Printf("%x\n", "x")
+	fmt.Printf("%x\n", " ")
+	fmt.Println()
+
+	fmt.Printf("%p\n", &p)
+	fmt.Println()
 }
