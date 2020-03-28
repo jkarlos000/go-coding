@@ -1,32 +1,32 @@
 package main
 
-import (
-	"fmt"
-	"io"
-)
+import "fmt"
 
 type gopher struct {
-
-}
-
-func (g *gopher) Write(p []byte) (n int, err error) {
-	return 0, nil
-}
-
-func (g *gopher) Read(p []byte) (n int, err error) {
-	return 0, nil
-}
-
-func fetchType(i interface{}) {
-	switch i.(type) {
-	case io.ReadWriter:
-		fmt.Println("Implementado ReadWriter Interface")
-	default:
-		fmt.Println("No tengo implementado la interfaz ReadWriter")
-	}
+	Name	string
+	Color	string
+	Size	float64
 }
 
 func main() {
-	g := &gopher{}
-	fetchType(g)
+	//var gopher gopher
+	var gopherP *gopher
+	//fmt.Println(gopher == nil)
+	fmt.Println(gopherP == nil)
+	fmt.Println("Hello, Playground")
+
+
+	var integer *int
+	var empty interface{}
+
+	fmt.Println(integer == nil)
+	fmt.Println(empty == nil)
+	fmt.Println(integer == empty)
+
+	empty = integer
+
+	fmt.Println(integer == nil)   // Prints: true
+	fmt.Println(empty == nil)     // Prints: false
+	fmt.Println(integer == empty) // Prints: true
+	fmt.Printf("a=(%T,%v)\n", empty, empty) // Prints: a=(*int,<nil>)
 }
