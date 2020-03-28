@@ -1,17 +1,20 @@
 package main
 
-import (
-	"fmt"
-	"os"
-)
+import "fmt"
+
+func foo() {
+	fmt.Println("Foo()")
+	defer bar()
+	panic("Argh!")
+}
+
+func bar() {
+	fmt.Println("bar()")
+	err := recover()
+	fmt.Printf("err = %+v", err)
+}
 
 func main() {
-	f, err := os.Create("xd/defer.txt")
-	if err != nil {
-		panic("No se puede crear el fichero")
-	} else {
-		fmt.Printf("err = %+v", err)
-	}
-	defer f.Close()
-	fmt.Fprint(f,"Hahaha soy parte de un fichero")
+	foo()
+	fmt.Println()
 }
