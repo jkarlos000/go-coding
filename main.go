@@ -1,49 +1,32 @@
 package main
 
-import "fmt"
-
-type animal struct {
-	name string
-	species string
-}
-
-func (a *animal) Name() {
-	fmt.Println(a.name)
-}
-
-func (a *animal) Species() {
-	fmt.Printf("%s belongs to %s species\n", a.name, a.species)
-}
+import (
+	"fmt"
+	"io"
+)
 
 type gopher struct {
-	color string
-	animal
+
 }
 
-func (g *gopher) Color() {
-	fmt.Printf("%s is the color: %s\n", g.name, g.color)
+func (g *gopher) Write(p []byte) (n int, err error) {
+	return 0, nil
 }
 
-func (g *gopher) Name() {
-	fmt.Printf("I'm a %s but my real name is %s\n", g.name, "Jkarlos")
+func (g *gopher) Read(p []byte) (n int, err error) {
+	return 0, nil
 }
 
-func New(a animal) {
-	fmt.Println("I'm similar to inheritance, but I'm composition")
+func fetchType(i interface{}) {
+	switch i.(type) {
+	case io.ReadWriter:
+		fmt.Println("Implementado ReadWriter Interface")
+	default:
+		fmt.Println("No tengo implementado la interfaz ReadWriter")
+	}
 }
 
 func main() {
-	a := animal{
-		name:    "Gopher",
-		species: "Go Gopher",
-	}
-	g := &gopher{
-		color:  "blue",
-		animal: a,
-	}
-	g.Name()
-	g.Species()
-	g.Color()
-
-	New(g)
+	g := &gopher{}
+	fetchType(g)
 }
