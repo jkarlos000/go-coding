@@ -1,9 +1,6 @@
 package main
 
-import (
-	"encoding/json"
-	"fmt"
-)
+import "fmt"
 
 type Node struct {
 	key byte
@@ -41,6 +38,36 @@ func (n *Node) insert(data byte) {
 	}
 }
 
+func printPreOrder(n *Node) {
+	if n == nil {
+		return
+	} else {
+		fmt.Printf("%c ", n.key)
+		printPreOrder(n.left)
+		printPreOrder(n.right)
+	}
+}
+
+func printPostOrder(n *Node) {
+	if n == nil {
+		return
+	} else {
+		printPostOrder(n.left)
+		printPostOrder(n.right)
+		fmt.Printf("%c ", n.key)
+	}
+}
+
+func printInOrder(n *Node) {
+	if n == nil {
+		return
+	} else {
+		printInOrder(n.left)
+		fmt.Printf("%c ", n.key)
+		printInOrder(n.right)
+	}
+}
+
 func main() {
 	var t Tree
 
@@ -54,10 +81,15 @@ func main() {
 	t.insert('I')
 	t.insert('H')
 
-	out, err := json.Marshal(t)
-	if err != nil {
-		panic (err)
-	}
-	fmt.Printf("%v\n", out) //Realizar método ToString()
+	fmt.Printf("Pre Order: ")
+	printPreOrder(t.root)
+	fmt.Println()
 
+	fmt.Printf("Post Order: ")
+	printPostOrder(t.root)
+	fmt.Println()
+
+	fmt.Printf("In Order: ")
+	printInOrder(t.root)
+	fmt.Println()
 }
