@@ -2,94 +2,48 @@ package main
 
 import "fmt"
 
-type Node struct {
-	key byte
-	left *Node
-	right *Node
+type animal struct {
+	name string
+	species string
 }
 
-type Tree struct {
-	root *Node
+func (a *animal) Name() {
+	fmt.Println(a.name)
 }
 
-// Árbol
-func (t *Tree) insert(data byte) {
-	if t.root == nil {
-		t.root = &Node{key: data}
-	} else {
-		t.root.insert(data)
-	}
+func (a *animal) Species() {
+	fmt.Printf("%s belongs to %s species\n", a.name, a.species)
 }
 
-// Nodo
-func (n *Node) insert(data byte) {
-	if data <= n.key {
-		if n.left == nil {
-			n.left = &Node{key: data}
-		} else {
-			n.left.insert(data)
-		}
-	} else {
-		if n.right == nil {
-			n.right = &Node{key: data}
-		} else {
-			n.right.insert(data)
-		}
-	}
+type gopher struct {
+	color string
+	animal
 }
 
-func printPreOrder(n *Node) {
-	if n == nil {
-		return
-	} else {
-		fmt.Printf("%c ", n.key)
-		printPreOrder(n.left)
-		printPreOrder(n.right)
-	}
+func (g *gopher) Color() {
+	fmt.Printf("%s is the color: %s\n", g.name, g.color)
 }
 
-func printPostOrder(n *Node) {
-	if n == nil {
-		return
-	} else {
-		printPostOrder(n.left)
-		printPostOrder(n.right)
-		fmt.Printf("%c ", n.key)
-	}
+func (g *gopher) Name() {
+	fmt.Printf("I'm a %s but my real name is %s\n", g.name, "Jkarlos")
 }
 
-func printInOrder(n *Node) {
-	if n == nil {
-		return
-	} else {
-		printInOrder(n.left)
-		fmt.Printf("%c ", n.key)
-		printInOrder(n.right)
-	}
+func New(a animal) {
+	fmt.Println("I'm similar to inheritance, but I'm composition")
 }
 
 func main() {
-	var t Tree
+	a := animal{
+		name:    "Gopher",
+		species: "Go Gopher",
+	}
+	g := &gopher{
+		color:  "blue",
+		animal: a,
+	}
+	g.Name()
+	g.Species()
+	g.Color()
 
-	t.insert('F')
-	t.insert('B')
-	t.insert('A')
-	t.insert('D')
-	t.insert('C')
-	t.insert('E')
-	t.insert('G')
-	t.insert('I')
-	t.insert('H')
-
-	fmt.Printf("Pre Order: ")
-	printPreOrder(t.root)
-	fmt.Println()
-
-	fmt.Printf("Post Order: ")
-	printPostOrder(t.root)
-	fmt.Println()
-
-	fmt.Printf("In Order: ")
-	printInOrder(t.root)
-	fmt.Println()
+	New(g)
 }
