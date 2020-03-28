@@ -1,30 +1,29 @@
 package main
 
 import (
-	"encoding/json"
+	"database/sql"
 	"fmt"
+	"strconv"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
-type Message struct {
-	Name, Body string
-	Time int64
-}
-
 func main() {
-	m := Message{
-		Name: "Interfaz",
-		Body: "Interfaz Vacía",
-		Time: 1556747623,
+	database, _ :=
+		sql.Open("sqlite3", "./jkgo.db")
+	statement, _ :=
+		database.Prepare("CREATE TABLE IF NOT EXISTS people (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT)")
+	statement.Exec()
+	statement, _ =
+		database.Prepare("INSERT INTO people (firstname, lastname) VALUES (?, ?)")
+	statement.Exec("Rob", "Gronkowski")
+	rows, _ :=
+		database.Query("SELECT id, firstname, lastname FROM people")
+	var id int
+	var firstname string
+	var lastname string
+	for rows.Next() {
+		rows.Scan(&id, &firstname, &lastname)
+		fmt.Println(strconv.Itoa(id) + ": " + firstname + " " + lastname)
 	}
-	b, err := json.Marshal(m)
-	fmt.Printf("err = %v\n", err)
-	fmt.Printf("b = %T%+v\n", b, b)
-	fmt.Printf("b = %T%s\n",b,b)
-
-	var md Message
-	err = json.Unmarshal(b, &md)
-	fmt.Printf("err = %v\n", err)
-	fmt.Printf("b = %T%+v\n", b, b)
-	fmt.Printf("b = %T%s\n",b,b)
-	fmt.Printf("type = %T, md = %+v\n", md, md)
 }
