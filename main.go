@@ -2,19 +2,28 @@ package main
 
 import "fmt"
 
-func foo() {
-	fmt.Println("Foo()")
-	defer bar()
-	panic("Argh!")
+func f() {
+	/*defer func() {
+		if r:=recover(); r != nil {
+			fmt.Println("Recovered in f", r)
+		}
+	}()*/
+	fmt.Println("Calling g()")
+	g(0)
+	fmt.Println("Return normally from g()")
 }
 
-func bar() {
-	fmt.Println("bar()")
-	err := recover()
-	fmt.Printf("err = %+v", err)
+func g(i int) {
+	if i > 3 {
+		fmt.Println("Panicking!")
+		panic(fmt.Sprintf("%v", i+99))
+	}
+	defer fmt.Println("Defer in g()", i)
+	fmt.Println("Printing ing g()", i)
+	g(i+1)
 }
 
 func main() {
-	foo()
-	fmt.Println()
+	f()
+	fmt.Println("Returned normally from f()")
 }
