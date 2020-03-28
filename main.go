@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type Node struct {
 	key byte
@@ -51,6 +54,10 @@ func main() {
 	t.insert('I')
 	t.insert('H')
 
-	fmt.Printf("%v\n", t) //Realizar método ToString()
+	out, err := json.Marshal(t)
+	if err != nil {
+		panic (err)
+	}
+	fmt.Printf("%v\n", out) //Realizar método ToString()
 
 }
