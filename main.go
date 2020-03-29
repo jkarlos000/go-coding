@@ -1,34 +1,27 @@
 package main
 
-import (
-	"fmt"
+import "fmt"
+
+const (
+	a = iota
+	b = iota
+	c = iota
+)
+
+const (
+	d = iota
+	e
+	f
 )
 
 func main() {
-	s1 := `El BB:
-Buenos dias my bb, tengo algo que mostrar:
+	fmt.Println(a,b,c)
 
-*El bb no sale afuera
-*El bebe necesita su leche.
-
-
-Atte. Jk.`
-
-	fmt.Println(s1)
-	bs := []rune(s1)
-
-	fmt.Printf("%T\n", bs)
-	fmt.Printf("%v\n", bs)
-
-	fmt.Println()
-
-	for i := 0; i < len(s1); i++ {
-		fmt.Printf("%#U ", s1[i])
-	}
-
-	fmt.Println()
-
-	for i, v := range s1 {
-		fmt.Printf("El índice %d tiene el valor %v (%c) Hexa(%#x)\n", i, v,v,v)
-	}
+	fmt.Printf("%T\n", a)
+	fmt.Printf("%T\n", b)
+	fmt.Printf("%T\n", c)
+	fmt.Println(d,e,f)
+	fmt.Printf("%T\n", d)
+	fmt.Printf("%T\n", e)
+	fmt.Printf("%T\n", f)
 }
