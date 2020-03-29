@@ -2,26 +2,17 @@ package main
 
 import "fmt"
 
-const (
-	a = iota
-	b = iota
-	c = iota
-)
-
-const (
-	d = iota
-	e
-	f
-)
-
 func main() {
-	fmt.Println(a,b,c)
+	a := 4
+	fmt.Printf("%d\t\t%b\n",a,a)
+	b := a << 1
+	fmt.Printf("%d\t\t%b\n",b,b)
 
-	fmt.Printf("%T\n", a)
-	fmt.Printf("%T\n", b)
-	fmt.Printf("%T\n", c)
-	fmt.Println(d,e,f)
-	fmt.Printf("%T\n", d)
-	fmt.Printf("%T\n", e)
-	fmt.Printf("%T\n", f)
+	kb := 1024
+	gb := kb * 1024
+	tb := gb * 1024
+
+	fmt.Printf("%d\t\t%b\n",kb,kb)
+	fmt.Printf("%d\t\t%b\n",gb,gb)
+	fmt.Printf("%d\t\t%b\n",tb,tb)
 }
