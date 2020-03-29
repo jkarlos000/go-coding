@@ -2,17 +2,28 @@ package main
 
 import "fmt"
 
+const (
+	a = 42
+	b int = 43
+)
+
 func main() {
-	a := 4
-	fmt.Printf("%d\t\t%b\n",a,a)
-	b := a << 1
-	fmt.Printf("%d\t\t%b\n",b,b)
+	x := 42
+	fmt.Printf("%d\t\t%b\t\t%#x\n",x,x,x)
 
-	kb := 1024
-	gb := kb * 1024
-	tb := gb * 1024
+	fmt.Println(42 == 42)
+	fmt.Println(43 <= 43)
+	fmt.Println(42>=41)
+	fmt.Println(42 != 43)
+	fmt.Println(42 < 43)
+	fmt.Println(42>41)
 
-	fmt.Printf("%d\t\t%b\n",kb,kb)
-	fmt.Printf("%d\t\t%b\n",gb,gb)
-	fmt.Printf("%d\t\t%b\n",tb,tb)
+	fmt.Println(a,b)
+
+	y := 42
+	fmt.Printf("%d\t%b\t%#x\n", y,y,y)
+	z := y << 1
+	z = z | 1
+	fmt.Printf("%d\t%b\t%#x\n", z,z,z)
+
 }
