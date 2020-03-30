@@ -3,14 +3,21 @@ package main
 import "fmt"
 
 func main() {
-	x := []int{1,2,3,4,5}
-	y := make([]int,0)
-	y = append(y, 55,221,345,4848)
-	x = append(x, y...)
+	m := map[string]int{
+		"Batman": 32,
+		"Robin":  27,
+	}
 
-	fmt.Println(x)
-	x = append(x[:2],x[4:]...)
-
-	fmt.Println(x)
-
+	m["Carlos"] = 25
+	for key, value := range m {
+		fmt.Println(key, value)
+	}
+	delete(m, "Carlos")
+	for key, value := range m {
+		fmt.Println(key, value)
+	}
+	if v, ok := m["Carlos"]; ok {
+		fmt.Printf("Existe la llave valor Carlos con edad %v\n", v)
+		delete(m, "Robin")
+	}
 }
