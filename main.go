@@ -1,20 +1,20 @@
 package main
 
-import (
-	"fmt"
-	"time"
-)
+import "fmt"
 
 func main() {
-	x := 0
-	for {
-		x ++
-		if x%2 != 0 {
-			fmt.Println("Hehehehe, sopenco, tu sos",x)
-			//fmt.Printf("Hehehehe, sopenco, tu sos %v", x)
-			continue
+	for i := 0; i <= 122; i++ {
+		fmt.Printf("%d\t%#x\t%#U\n",i,i,i)
+		switch {
+		case i%2 == 0, i > 120://Cualquiera de estas condiciones sea verdadero, ejecutara la instrucción
+			fmt.Println(i)
+		case i == 15:
+			fmt.Println("Soy 15")
+			fallthrough
+		case i == 2:
+			fmt.Println("SOy 2 y 15 luego")
+		default:
+			fmt.Println("Default")
 		}
-		fmt.Println(x)
-		time.Sleep(time.Second*1)
 	}
 }
