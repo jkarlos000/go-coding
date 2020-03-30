@@ -2,22 +2,51 @@ package main
 
 import "fmt"
 
-func main() {
-	m := map[string]int{
-		"Batman": 32,
-		"Robin":  27,
-	}
+type persona struct {
+	nombre	string
+	apellido	string
+}
 
-	m["Carlos"] = 25
-	for key, value := range m {
-		fmt.Println(key, value)
+type agente struct {
+	persona
+	administrador bool
+}
+
+type humano interface {
+	presentar()
+}
+
+func (p persona) presentar()  {
+	fmt.Println(p)
+}
+
+func (a agente) presentar() {
+	fmt.Println(a)
+}
+
+func foo(h humano) {
+	switch h.(type) {
+	case agente:
+		fmt.Println("Soy un agente, mi nombre es: ", h.(agente).nombre)
+	case persona:
+		fmt.Println("Soy un hombre ordinario, una persona simple, mi nombre es: ", h.(persona).nombre)
+	default:
+		fmt.Println("No pertenezco a la estructura, pero si a la interfaz.")
 	}
-	delete(m, "Carlos")
-	for key, value := range m {
-		fmt.Println(key, value)
+}
+
+func main() {
+	p := persona{
+		nombre:   "Widito",
+		apellido: "Bueno",
 	}
-	if v, ok := m["Carlos"]; ok {
-		fmt.Printf("Existe la llave valor Carlos con edad %v\n", v)
-		delete(m, "Robin")
+	a := agente{
+		persona:       persona{
+			nombre:   "Pi, PiBond",
+			apellido: "00Pi",
+		},
+		administrador: true,
 	}
+	foo(p)
+	foo(a)
 }
