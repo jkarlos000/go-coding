@@ -20,8 +20,48 @@ func sumaPar(f func(ii ...int) int, vi ...int) int {
 	return f(y...)
 }
 
+func sumaImpar(f func(ii ...int) int, vi ...int) int {
+	var y []int
+	for _, v := range vi{
+		if v % 2 != 0 {
+			y = append(y, v)
+		}
+	}
+	return f(y...)
+}
+
+func incrementor() func() int {
+	var x int
+	return func() int {
+		x++
+		return x
+	}
+}
+
 func main() {
 	s1 := []int{22,13,54,23,6,3,72,76,2,4,12}
 	x := sumaPar(suma,s1...)
 	fmt.Println(x)
+	x = sumaImpar(suma,s1...)
+	fmt.Println(x)
+
+	{ //Bloque de codigo dentro de otro, solo existe este instante y luego se libera *-*, se reduce el scope
+		y := "Hola"
+		fmt.Println(x)
+		fmt.Println(y)
+	}
+
+	a := incrementor()
+	b := incrementor()
+	fmt.Println(a())
+	fmt.Println(a())
+	fmt.Println(a())
+	fmt.Println(a())
+	fmt.Println(a())
+	fmt.Println(b())
+	fmt.Println(b())
+	fmt.Println(b())
+	fmt.Println(b())
+
 }
+
