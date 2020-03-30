@@ -3,7 +3,14 @@ package main
 import "fmt"
 
 func main() {
-	for i := 10; i <= 100; i++ {
-		fmt.Printf("Cuando dividimos %v entre 4, el resto (también módulo) es %v\n", i, i%4)
-	}
+	x := []int{1,2,3,4,5}
+	y := make([]int,0)
+	y = append(y, 55,221,345,4848)
+	x = append(x, y...)
+
+	fmt.Println(x)
+	x = append(x[:2],x[4:]...)
+
+	fmt.Println(x)
+
 }
