@@ -2,51 +2,26 @@ package main
 
 import "fmt"
 
-type persona struct {
-	nombre	string
-	apellido	string
-}
-
-type agente struct {
-	persona
-	administrador bool
-}
-
-type humano interface {
-	presentar()
-}
-
-func (p persona) presentar()  {
-	fmt.Println(p)
-}
-
-func (a agente) presentar() {
-	fmt.Println(a)
-}
-
-func foo(h humano) {
-	switch h.(type) {
-	case agente:
-		fmt.Println("Soy un agente, mi nombre es: ", h.(agente).nombre)
-	case persona:
-		fmt.Println("Soy un hombre ordinario, una persona simple, mi nombre es: ", h.(persona).nombre)
-	default:
-		fmt.Println("No pertenezco a la estructura, pero si a la interfaz.")
+func suma(xi ...int) int {
+	total := 0
+	for _, v := range xi{
+		total += v
 	}
+	return total
+}
+
+func sumaPar(f func(ii ...int) int, vi ...int) int {
+	var y []int
+	for _, v := range vi{
+		if v % 2 == 0 {
+			y = append(y, v)
+		}
+	}
+	return f(y...)
 }
 
 func main() {
-	p := persona{
-		nombre:   "Widito",
-		apellido: "Bueno",
-	}
-	a := agente{
-		persona:       persona{
-			nombre:   "Pi, PiBond",
-			apellido: "00Pi",
-		},
-		administrador: true,
-	}
-	foo(p)
-	foo(a)
+	s1 := []int{22,13,54,23,6,3,72,76,2,4,12}
+	x := sumaPar(suma,s1...)
+	fmt.Println(x)
 }
