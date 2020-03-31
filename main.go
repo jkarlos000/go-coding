@@ -1,28 +1,58 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
-	"golang.org/x/crypto/bcrypt"
+	"os"
 )
 
+type usuario struct {
+	Nombre, Apellido string
+	Edad int
+	Dichos []string
+}
+
 func main() {
-	s := `Cambiamejk1!.`
-	s2 := "Hola"
-	bs1, err := bcrypt.GenerateFromPassword([]byte(s), 4)
-	if err != nil{
-		fmt.Println(err)
+	u1 := usuario{
+		Nombre:   "Eduar",
+		Apellido: "Tua",
+		Edad:     32,
+		Dichos: []string{
+			"Cachicamo diciéndole a morrocoy conchudo",
+			"La mona, aunque se vista de seda, mona se queda",
+			"Poco a poco se anda lejos",
+		},
 	}
-	fmt.Println(string(bs1))
-	var bs []byte
-	bs, err = bcrypt.GenerateFromPassword([]byte(s2), 4)
-	if err != nil{
-		fmt.Println(err)
+
+	u2 := usuario{
+		Nombre:   "Carlos",
+		Apellido: "Pérez",
+		Edad:     27,
+		Dichos: []string{
+			"Camarón que se duerme se lo lleva la corriente",
+			"A ponerse las alpargatas que lo que viene es joropo",
+			"No gastes pólvora en zamuro",
+		},
 	}
-	fmt.Println(string(bs))
-	err = bcrypt.CompareHashAndPassword(bs1, []byte("Cambiamejk1!."))
+
+	u3 := usuario{
+		Nombre:   "Che",
+		Apellido: "López",
+		Edad:     54,
+		Dichos: []string{
+			"Ni lava ni presta la batea",
+			"Hijo de gato, caza ratón",
+			"Más vale pájaro en mano que cien volando",
+		},
+	}
+
+	usuarios := []usuario{u1,u2,u3}
+	fmt.Println(usuarios)
+
+	//Code Here
+
+	err := json.NewEncoder(os.Stdout).Encode(usuarios)
 	if err != nil {
-		fmt.Println("No te puedes loggear")
-		return
+		fmt.Println(err)
 	}
-	fmt.Println("Te has loggeado")
 }
