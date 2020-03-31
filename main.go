@@ -2,66 +2,23 @@ package main
 
 import "fmt"
 
-func suma(xi ...int) int {
-	total := 0
-	for _, v := range xi{
-		total += v
-	}
-	return total
-}
-
-func sumaPar(f func(ii ...int) int, vi ...int) int {
-	var y []int
-	for _, v := range vi{
-		if v % 2 == 0 {
-			y = append(y, v)
-		}
-	}
-	return f(y...)
-}
-
-func sumaImpar(f func(ii ...int) int, vi ...int) int {
-	var y []int
-	for _, v := range vi{
-		if v % 2 != 0 {
-			y = append(y, v)
-		}
-	}
-	return f(y...)
-}
-
-func incrementor() func() int {
-	var x int
-	return func() int {
-		x++
-		return x
-	}
-}
-
 func main() {
-	s1 := []int{22,13,54,23,6,3,72,76,2,4,12}
-	x := sumaPar(suma,s1...)
-	fmt.Println(x)
-	x = sumaImpar(suma,s1...)
-	fmt.Println(x)
-
-	{ //Bloque de codigo dentro de otro, solo existe este instante y luego se libera *-*, se reduce el scope
-		y := "Hola"
-		fmt.Println(x)
-		fmt.Println(y)
+	g := func(xi []int) int {
+		if len(xi) == 0 {
+			return 0
+		}
+		if len(xi) == 1 {
+			return xi[0]
+		}
+		return xi[0] + xi[len(xi) - 1]
 	}
 
-	a := incrementor()
-	b := incrementor()
-	fmt.Println(a())
-	fmt.Println(a())
-	fmt.Println(a())
-	fmt.Println(a())
-	fmt.Println(a())
-	fmt.Println(b())
-	fmt.Println(b())
-	fmt.Println(b())
-	fmt.Println(b())
-
+	x := foo(g, []int{1,2,3,4,5})
+	fmt.Println(x)
 }
 
+func foo(f func([]int) int, ii []int) int {
+	n := f(ii)
+	n++
+	return n
+}
