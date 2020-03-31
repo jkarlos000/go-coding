@@ -2,39 +2,27 @@ package main
 
 import (
 	"fmt"
-	"sort"
+	"golang.org/x/crypto/bcrypt"
 )
 
-type Persona struct {
-	Nombre string
-	Edad   int
-}
-
-type PorNombre []Persona
-
-func (a PorNombre) Len() int           { return len(a) }
-func (a PorNombre) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a PorNombre) Less(i, j int) bool { return a[i].Nombre < a[j].Nombre }
-
-type PorEdad []Persona
-
-func (a PorEdad) Len() int            { return len(a) }
-func (a PorEdad) Swap(i, j int)     { a[i], a[j] = a[j], a[i] }
-func (a PorEdad) Less(i, j int) bool { return a[i].Edad < a[j].Edad }
-
 func main() {
-	p1 := Persona{"Eduar", 32}
-	p2 := Persona{"María", 25}
-	p3 := Persona{"Carolina", 56}
-	p4 := Persona{"Adriana", 60}
-
-	personas := []Persona{p1, p2, p3, p4}
-
-	fmt.Println(personas)
-	sort.Sort(PorNombre(personas))
-	fmt.Println(personas)
-
-	fmt.Println(personas)
-	sort.Sort(PorEdad(personas))
-	fmt.Println(personas)
+	s := `Cambiamejk1!.`
+	s2 := "Hola"
+	bs1, err := bcrypt.GenerateFromPassword([]byte(s), 4)
+	if err != nil{
+		fmt.Println(err)
+	}
+	fmt.Println(string(bs1))
+	var bs []byte
+	bs, err = bcrypt.GenerateFromPassword([]byte(s2), 4)
+	if err != nil{
+		fmt.Println(err)
+	}
+	fmt.Println(string(bs))
+	err = bcrypt.CompareHashAndPassword(bs1, []byte("Cambiamejk1!."))
+	if err != nil {
+		fmt.Println("No te puedes loggear")
+		return
+	}
+	fmt.Println("Te has loggeado")
 }
