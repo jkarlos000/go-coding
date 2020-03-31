@@ -6,30 +6,27 @@ import (
 	"sync"
 )
 
-var wg sync.WaitGroup
-
 func main() {
-	fmt.Println(runtime.GOARCH)
-	fmt.Println(runtime.GOOS)
-	fmt.Println(runtime.NumCPU())
+	fmt.Println("Número de CPU:", runtime.NumCPU())
+	fmt.Println("Número de Go-Runtime:", runtime.NumGoroutine())
+	contador := 0
 
-	wg.Add(1)
-
-	go foo()
-	bar()
-	fmt.Println("Numero de GoRountine:",runtime.NumGoroutine())
+	const gs = 100
+	var wg sync.WaitGroup
+	wg.Add(gs)
+	var mu sync.Mutex
+	for i := 0; i < gs; i++ {
+		go func() {
+			mu.Lock()
+			v := contador
+			v++
+			runtime.Gosched()
+			contador = v
+			mu.Unlock()
+			wg.Done()
+		}()
+		fmt.Println("Número de Go-Runtime:", runtime.NumGoroutine())
+	}
 	wg.Wait()
-}
-
-func foo() {
-	for i := 0; i < 10; i++ {
-		fmt.Println("foo",i)
-	}
-	wg.Done()
-}
-
-func bar() {
-	for i := 0; i < 10; i++ {
-		fmt.Println("bar:",i)
-	}
+	fmt.Println("Cuenta:", contador)
 }
