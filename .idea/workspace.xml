@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc6801eb-55ba-4662-9ab1-572b0412b999" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -229,11 +230,12 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="365" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1280.984@0.0.1920.1040" timestamp="1585414162224" />
-    <state x="336" y="209" width="1136" height="711" key="SettingsEditor" timestamp="1585192683754">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="336" y="217" width="1136" height="711" key="SettingsEditor" timestamp="1585621752424">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="336" y="209" width="1136" height="711" key="SettingsEditor/0.0.1920.1040/1920.0.1280.984@0.0.1920.1040" timestamp="1585192683754" />
     <state x="2100" y="237" key="SettingsEditor/0.0.1920.1040/1920.0.1280.984@1920.0.1280.984" timestamp="1585022813397" />
+    <state x="336" y="217" key="SettingsEditor/0.0.1920.1080/1920.0.1280.1024@0.0.1920.1080" timestamp="1585621752424" />
     <state x="767" y="429" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585073135594">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
