@@ -1,15 +1,42 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"os"
+	"sort"
 )
 
 type usuario struct {
 	Nombre, Apellido string
 	Edad int
 	Dichos []string
+}
+
+type PorEdad []usuario
+
+func (a PorEdad) Len() int {
+	return len(a)
+}
+
+func (a PorEdad) Swap(i,j int)  {
+	a[i], a[j] = a[j], a[i]
+}
+
+func (a PorEdad) Less(i, j int) bool {
+	return a[i].Edad < a[j].Edad
+}
+
+type PorApellido []usuario
+
+func (a PorApellido) Len() int {
+	return len(a)
+}
+
+func (a PorApellido) Swap(i,j int)  {
+	a[i], a[j] = a[j], a[i]
+}
+
+func (a PorApellido) Less(i, j int) bool {
+	return a[i].Apellido < a[j].Apellido
 }
 
 func main() {
@@ -51,8 +78,38 @@ func main() {
 
 	//Code Here
 
-	err := json.NewEncoder(os.Stdout).Encode(usuarios)
-	if err != nil {
-		fmt.Println(err)
+	for _, v := range usuarios {
+		fmt.Println(v.Nombre, v.Apellido, v.Edad)
+		for _, v := range v.Dichos {
+			fmt.Println("\t", v)
+		}
+	}
+
+	fmt.Println("-------------------------------")
+	sort.Sort(PorEdad(usuarios))
+	for _, v := range usuarios {
+		fmt.Println(v.Nombre, v.Apellido, v.Edad)
+		for _, v := range v.Dichos {
+			fmt.Println("\t", v)
+		}
+	}
+
+	fmt.Println("-------------------------------")
+	sort.Sort(PorApellido(usuarios))
+	for _, v := range usuarios {
+		fmt.Println(v.Nombre, v.Apellido, v.Edad)
+		for _, v := range v.Dichos {
+			fmt.Println("\t", v)
+		}
+	}
+
+	fmt.Println("-------------------------------")
+	sort.Sort(PorApellido(usuarios))
+	for _, v := range usuarios {
+		fmt.Println(v.Nombre, v.Apellido, v.Edad)
+		sort.Strings(v.Dichos)
+		for _, v := range v.Dichos {
+			fmt.Println("\t", v)
+		}
 	}
 }
