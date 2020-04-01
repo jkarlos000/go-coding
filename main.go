@@ -1,49 +1,45 @@
 package main
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+	"runtime"
+	"time"
+)
 
 func main() {
-	par := make(chan int)
-	impar := make(chan int)
-	salir := make(chan int)
+	runtime.GOMAXPROCS(8)
+	ctx, cancel := context.WithCancel(context.Background())
 
-	// enviar
-	go enviar(par, impar, salir)
+	fmt.Println("Verificando el error 1:", ctx.Err())
+	fmt.Println("Número de Go Runtime 1:", runtime.NumGoroutine())
 
-	// recibir
-	recibir(par, impar, salir)
-
-	fmt.Println("Finalizando")
-}
-
-// Uso del idioma Coma, el canal devuelve 2 parámetros, values, estado (false -> cerrado por close(), true -> funcional)
-func recibir(par <-chan int, impar <-chan int, salir <-chan int) {
-	for {
-		select {
-		case v := <-par:
-			fmt.Println("Desde el canal par:", v)
-		case v := <-impar:
-			fmt.Println("Desde el canal impar:", v)
-		case v, ok := <-salir:
-			if !ok { // Si es falso, el canal se encuentra cerrado
-				fmt.Println("Desde el canal salir:", v)
+	go func() {
+		n := 0
+		for {
+			select {
+			case <- ctx.Done():
 				return
-			} else { // El canal aun se encuentra abierto.
-				fmt.Println("Desde el canal salir:", v)
+			default:
+				n++
+				time.Sleep(time.Millisecond * 200)
+				fmt.Println("Trabajo muy duro, como un esclavo, denme dinero +", n)
 			}
 		}
-	}
-}
+	}()
+	time.Sleep(time.Second*2)
 
-func enviar(par chan<- int, impar chan<- int, salir chan<- int) {
-	for j := 0; j < 100; j++ {
-		if j%2 == 0 {
-			par <- j
-		} else {
-			impar <- j
-		}
-	}
-	/*close(par)
-	close(impar)*/
-	close(salir)
+	fmt.Println("Verificando error:", ctx.Err())
+	fmt.Println("Número de GORuntime 2da:", runtime.NumGoroutine())
+
+	fmt.Println("A punto de cancelar el context")
+
+	cancel()
+
+	fmt.Println("Context cancelado")
+
+	time.Sleep(time.Second*2)
+	fmt.Println("Verificando error 3:", ctx.Err())
+	fmt.Println("Número de GORuntime 3ra:", runtime.NumGoroutine())
+
 }
