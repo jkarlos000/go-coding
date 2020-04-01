@@ -16,6 +16,7 @@ func main() {
 	fmt.Println("Finalizando")
 }
 
+// Uso del idioma Coma, el canal devuelve 2 parámetros, values, estado (false -> cerrado por close(), true -> funcional)
 func recibir(par <-chan int, impar <-chan int, salir <-chan int) {
 	for {
 		select {
@@ -23,9 +24,13 @@ func recibir(par <-chan int, impar <-chan int, salir <-chan int) {
 			fmt.Println("Desde el canal par:", v)
 		case v := <-impar:
 			fmt.Println("Desde el canal impar:", v)
-		case v := <-salir:
-			fmt.Println("Desde el canal salir:", v)
-			return
+		case v, ok := <-salir:
+			if !ok { // Si es falso, el canal se encuentra cerrado
+				fmt.Println("Desde el canal salir:", v)
+				return
+			} else { // El canal aun se encuentra abierto.
+				fmt.Println("Desde el canal salir:", v)
+			}
 		}
 	}
 }
@@ -40,5 +45,5 @@ func enviar(par chan<- int, impar chan<- int, salir chan<- int) {
 	}
 	/*close(par)
 	close(impar)*/
-	salir <- 0
+	close(salir)
 }
