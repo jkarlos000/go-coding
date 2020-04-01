@@ -3,29 +3,20 @@ package main
 import "fmt"
 
 func main() {
-	//Canales unilaterales
+	c := make(chan int)
 
-	// Declarando canal de tipo SET ONLY, solo se envia información a este Canal, este tendrá un buffer de 2
-	ca := make(chan<- int, 2)
+	// enviar
+	go enviar(c)
+	/*go*/ recibir(c)
 
-	/*ca <- 42
-	ca <- 43*/
+	fmt.Println("Finalizado")
 
-	fmt.Printf("%T\n", ca)
+}
 
-	// Declarando canal de tipo RECEIVE ONLY, solo recibe información de este Canal, este tendrá un buffer de 2
-	cb := make(<-chan int, 2)
+func enviar(c chan<- int) {// Solo se recibe un canal SEND ONLY
+	c <- 42
+}
 
-	/*cb <- 42
-	cb <- 43*/
-
-	fmt.Printf("%T\n", cb)
-
-	// Canales bidireccionales pueden ser HEREDADOS a los canales unilaterales receive or send, esta es la única operación permitida
-	 c := make(chan int, 2)
-
-	 ca = c
-	 cb = c
-
-	fmt.Printf("%T\n", c)
+func recibir(c <-chan int) {// SOLO se recibe un canal RECEIVE ONLY
+	fmt.Println(<-c)
 }
