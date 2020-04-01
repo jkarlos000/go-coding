@@ -3,31 +3,29 @@ package main
 import "fmt"
 
 func main() {
+	//Canales unilaterales
 
-	// Canal sin buffer, esto requiere que trabajen dos runtime, en este caso main y la función literal
-	ca := make(chan int)
+	// Declarando canal de tipo SET ONLY, solo se envia información a este Canal, este tendrá un buffer de 2
+	ca := make(chan<- int, 2)
 
-	go func() {
-		ca <- 42
-	}()
+	/*ca <- 42
+	ca <- 43*/
 
-	fmt.Println(<-ca)
+	fmt.Printf("%T\n", ca)
 
-	// Canal con buffer, funciona en la misma subrutina, [1] es el tamaño del buffer
-	c1 := make(chan int, 1)
+	// Declarando canal de tipo RECEIVE ONLY, solo recibe información de este Canal, este tendrá un buffer de 2
+	cb := make(<-chan int, 2)
 
-	c1 <- 42
-	//c1 <- 43 // El tamaño de nuestro buffer es 1, si quiero añadir otro valor esto dara deadlock
+	/*cb <- 42
+	cb <- 43*/
 
-	fmt.Println(<-c1)
+	fmt.Printf("%T\n", cb)
 
-	// optimización para multiples tamaños
-	c2 := make(chan int, 2)
+	// Canales bidireccionales pueden ser HEREDADOS a los canales unilaterales receive or send, esta es la única operación permitida
+	 c := make(chan int, 2)
 
-	c2 <- 42
-	c2 <- 43
+	 ca = c
+	 cb = c
 
-	fmt.Println(<-c2)
-	fmt.Println(<-c2)
-
+	fmt.Printf("%T\n", c)
 }
