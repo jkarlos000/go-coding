@@ -27,4 +27,5 @@ func main() {
 	}
 	wg.Wait()
 	fmt.Println("Cuenta:", contador)
+	//Compilación cruzada: GOOS=linux GOARCH=amd64 go build main.go
 }
