@@ -1,20 +1,35 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
-type errorPer struct {
-	info	string
+type raizError struct {
+	lat, long string
+	err error
 }
 
-func (ep errorPer) Error() string {
-	return fmt.Sprintf("El error es: %v", ep.info)
+func (re raizError) Error() string {
+	return fmt.Sprintf("Error matemático: %v %v %v", re.lat, re.long, re.err)
 }
 
 func main() {
-	e1 := errorPer{info: "Necesito dormir más"}
-	foo(e1)
+	_, err := raiz(-10)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
 
-func foo(e error) {
-	fmt.Println("foo corrió -", e, "\n", e.(errorPer).info) // Uso de asertion, es diferente a conversion
+func raiz(f float64) (float64, error) {
+	if f < 0 {
+		//e := errors.New("Error sin formatear")
+		e := fmt.Errorf("(Error con formato :::: %v)", f)
+		return 0, raizError{
+			lat:  "50.548 N",
+			long: "89.374 W",
+			err:  e,
+		}
+	}
+	return 42, nil
 }
