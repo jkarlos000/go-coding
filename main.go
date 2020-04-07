@@ -1,34 +1,20 @@
 package main
 
-import (
-	"encoding/json"
-	"fmt"
-)
+import "fmt"
 
-type persona struct {
-	Nombre, Apellido	string
-	Frases	[]string
+type errorPer struct {
+	info	string
+}
+
+func (ep errorPer) Error() string {
+	return fmt.Sprintf("El error es: %v", ep.info)
 }
 
 func main() {
-	p1 := persona{
-		Nombre:   "Jame",
-		Apellido: "Bond",
-		Frases:   []string{"Shaken, not stirred", "¿Algún último deseo?", "Nunca digas nunca"},
-	}
-
-	buf, err := aJSON(p1)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	fmt.Println(string(buf))
+	e1 := errorPer{info: "Necesito dormir más"}
+	foo(e1)
 }
 
-func aJSON(a interface{}) ([]byte, error) {
-	bs, err := json.Marshal(a)
-	if err != nil {
-		return []byte{}, fmt.Errorf("Hubo un error al convertir en aJSON: %v", err)
-	}
-	return bs, nil
+func foo(e error) {
+	fmt.Println("foo corrió -", e, "\n", e.(errorPer).info) // Uso de asertion, es diferente a conversion
 }
