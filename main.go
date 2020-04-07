@@ -1,20 +1,34 @@
 package main
 
 import (
-	"errors"
-	"log"
+	"encoding/json"
+	"fmt"
 )
 
-func main() {
-	_, err := sqrt(-10)
-	if err != nil {
-		log.Fatalln(err)
-	}
+type persona struct {
+	Nombre, Apellido	string
+	Frases	[]string
 }
 
-func sqrt(f float64) (float64, error) {
-	if f < 0 {
-		return 0, errors.New("De matemática elemental: no hay raíz real para un número negativo")
+func main() {
+	p1 := persona{
+		Nombre:   "Jame",
+		Apellido: "Bond",
+		Frases:   []string{"Shaken, not stirred", "¿Algún último deseo?", "Nunca digas nunca"},
 	}
-	return 42, nil
+
+	buf, err := aJSON(p1)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(string(buf))
+}
+
+func aJSON(a interface{}) ([]byte, error) {
+	bs, err := json.Marshal(a)
+	if err != nil {
+		return []byte{}, fmt.Errorf("Hubo un error al convertir en aJSON: %v", err)
+	}
+	return bs, nil
 }
