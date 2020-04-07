@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestMiSuma(t *testing.T) {
 	type prueba struct {
@@ -31,4 +34,10 @@ func TestMiSuma(t *testing.T) {
 			t.Error("Expected", x.respuesta, "Got", v)
 		}
 	}
+}
+
+func ExampleMiSuma()  {
+	fmt.Println(miSuma(4,5,6))
+	//Output:
+	//15
 }
