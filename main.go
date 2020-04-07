@@ -1,21 +1,20 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"log"
+)
 
 func main() {
-	c := make(chan int)
-
-	for j:= 0 ; j<10; j++ {
-		go func() {
-			for i := 0; i < 10; i++ {
-				c <- i
-			}
-		}()
+	_, err := sqrt(-10)
+	if err != nil {
+		log.Fatalln(err)
 	}
-	//close(c)
+}
 
-	for k := 0; k< 100; k++ {
-		fmt.Println(k, <- c)
+func sqrt(f float64) (float64, error) {
+	if f < 0 {
+		return 0, errors.New("De matemática elemental: no hay raíz real para un número negativo")
 	}
-
+	return 42, nil
 }
