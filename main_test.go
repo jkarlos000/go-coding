@@ -7,7 +7,7 @@ import (
 
 func TestMiSuma(t *testing.T) {
 	type prueba struct {
-		datos []int
+		datos     []int
 		respuesta int
 	}
 	pruebas := []prueba{
@@ -28,7 +28,7 @@ func TestMiSuma(t *testing.T) {
 			respuesta: 14,
 		},
 	}
-	for _, x := range pruebas{
+	for _, x := range pruebas {
 		v := miSuma(x.datos...)
 		if v != x.respuesta {
 			t.Error("Expected", x.respuesta, "Got", v)
@@ -36,8 +36,8 @@ func TestMiSuma(t *testing.T) {
 	}
 }
 
-func ExampleMiSuma()  {
-	fmt.Println(miSuma(4,5,6))
+func ExampleMiSuma() {
+	fmt.Println(miSuma(4, 5, 6))
 	//Output:
 	//15
 }
