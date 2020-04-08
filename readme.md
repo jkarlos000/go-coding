@@ -1,4 +1,4 @@
-#Recuerda siempre hacer BET
+# Recuerda siempre hacer BET
 
 - Benchmark
 - Example
@@ -10,7 +10,7 @@ ExampleFunctionOrMethod()
 TestFunctionOrMethod(t *testing.T)
 ```
 
-#Comandos
+# Comandos
 
 ```
 godoc -http=localhost:puerto
